@@ -11,30 +11,29 @@ import java.io.IOException;
 @SpringBootApplication
 public class SendEmailApp {
 
-    static final String key = "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";
+    static final String key = "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";
 
     public static void main(String[] args) throws IOException {
+            Email to = new Email("emailto@eample.com");
+            Email from = new Email("remitente-sendgrid@example.com"); // use your own email address here
 
-        //Email to = new Email("nataliaflorencia.s@gmail.com");
-        Email to = new Email("nmonzon@magnetarsoftware.com");
-        Email from = new Email("cezcardozo23@gmail.com"); // use your own email address here
+            String subject = "Sending with Twilio SendGrid is Fun";
+            Content content = new Content("text/html", "and <em>easy</em> to do anywhere with <strong>Java</strong>");
 
-        String subject = "Sending with Twilio SendGrid is Fun";
-        Content content = new Content("text/html", "and <em>easy</em> to do anywhere with <strong>Java</strong>");
+            Mail mail = new Mail(from, subject, to, content);
+            String key = System.getenv("SENDGRID_API_KEY");
+            System.out.println(key);
+            SendGrid sg = new SendGrid(key);
+            Request request = new Request();
 
-        Mail mail = new Mail(from, subject, to, content);
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
 
-        SendGrid sg = new SendGrid(key);
-        Request request = new Request();
+            Response response = sg.api(request);
 
-        request.setMethod(Method.POST);
-        request.setEndpoint("mail/send");
-        request.setBody(mail.build());
-
-        Response response = sg.api(request);
-
-        System.out.println(response.getStatusCode());
-        System.out.println(response.getHeaders());
-        System.out.println(response.getBody());
+            System.out.println(response.getStatusCode());
+            System.out.println(response.getHeaders());
+            System.out.println(response.getBody());
     }
 }
