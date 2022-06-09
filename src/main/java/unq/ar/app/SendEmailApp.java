@@ -11,11 +11,11 @@ import java.io.IOException;
 @SpringBootApplication
 public class SendEmailApp {
 
-    static final String key = "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";
-
     public static void main(String[] args) throws IOException {
-            Email to = new Email("emailto@eample.com");
-            Email from = new Email("remitente-sendgrid@example.com"); // use your own email address here
+            //Email to = new Email("nataliaflorencia.s@gmail.com");
+            //Email to = new Email("magnetarnicolas@gmail.com");
+            Email to = new Email("cezcardozo23@gmail.com");
+            Email from = new Email("charlie.zolezzi.send.grid@gmail.com"); // use your own email address here
 
             String subject = "Sending with Twilio SendGrid is Fun";
             Content content = new Content("text/html", "and <em>easy</em> to do anywhere with <strong>Java</strong>");
